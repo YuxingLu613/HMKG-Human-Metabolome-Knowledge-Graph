@@ -30,12 +30,6 @@ The [Human Metabolome Database (HMDB)](https://hmdb.ca) is the largest metabolom
 
 py2neo==4.3.0
 
-py2neo==4.3.0
-
-pandas==1.4.4
-
-xmltodict==0.12.
-
 pandas==1.4.4
 
 xmltodict==0.12.0
@@ -81,6 +75,11 @@ Some recommended repositories are listed below:
 * GraphVite [https://github.com/DeepGraphLearning/graphvite](https://github.com/DeepGraphLearning/graphvite)
 * RotateE [https://github.com/DeepGraphLearning/KnowledgeGraphEmbedding](https://github.com/DeepGraphLearning/KnowledgeGraphEmbedding]())
 * KB2E [https://github.com/thunlp/KB2E](https://github.com/thunlp/KB2E)
+* AnpliGraph [https://github.com/Accenture/AmpliGraph](https://github.com/Accenture/AmpliGraph)
+* OpenKE [https://github.com/thunlp/OpenKE](https://github.com/thunlp/OpenKE)
+* PyKEEN [https://github.com/SmartDataAnalytics/PyKEEN](https://github.com/SmartDataAnalytics/PyKEEN)
+* Pykg2vec [https://github.com/Sujit-O/pykg2vec](https://github.com/Sujit-O/pykg2vec)
+* Dist-KGE [https://github.com/uma-pi1/dist-kge](https://github.com/uma-pi1/dist-kge)
 * ...
 
 ## KG Embedding Results
