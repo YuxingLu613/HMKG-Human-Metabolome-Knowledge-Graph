@@ -19,7 +19,7 @@ The [Human Metabolome Database (HMDB)](https://hmdb.ca) is the largest metabolom
 ├── build_graph.py
 ├── convert_xml.py
 ├── data
-│   ├── hmdb_metabolities.json
+│   ├── hmdb_metabolities.json (download by your own)
 │   └── selected_metabolities.csv
 ├── main.py
 ├── select_metabolites.py
@@ -30,7 +30,15 @@ The [Human Metabolome Database (HMDB)](https://hmdb.ca) is the largest metabolom
 
 py2neo==4.3.0
 
+py2neo==4.3.0
+
 pandas==1.4.4
+
+xmltodict==0.12.
+
+pandas==1.4.4
+
+xmltodict==0.12.0
 
 ## Usage
 
@@ -47,14 +55,22 @@ python main.py -XML_DATA_PATH ./data/hmdb_metabolities.xml \
 If you want to generate a subgraph using specific metebolities, you can add the required metabolities in the `./data/select_metabolities.csv` and add argument
 
 ```bash
--SELECT_METABOLITIES ./data/select_metabolities.csv
+python main.py -XML_DATA_PATH ./data/hmdb_metabolities.xml \ 
+	       -JSON_DATA_PATH ./data/hmdb_metabolities.json \
+	       -CREATE_GRAPH True
+	       -SELECT_METABOLITIES ./data/select_metabolities.csv
 ```
 
 If you want generate triples for further researches or downstream tasks, you can add argument
 
 ```
--CREATE_TRIPLE True
+python main.py -XML_DATA_PATH ./data/hmdb_metabolities.xml \ 
+	       -JSON_DATA_PATH ./data/hmdb_metabolities.json \
+	       -CREATE_GRAPH True
+	       -CREATE_TRIPLE True
 ```
+
+More functions are being developed~
 
 ## KG Embedding
 

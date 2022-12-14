@@ -1,5 +1,5 @@
 from utils import read_json_file
-from convert_xml import *
+from convert_xml import convert_xml_to_json
 from build_graph import build_graph, count_nodes, count_relations, create_node, create_relations
 # from transE import TransE,dataloader
 
@@ -25,14 +25,19 @@ if __name__=="__main__":
     graph.delete_all()
     
     if args.XML_DATA_PATH:
-        pass
+        print(f"Converting {args.XML_DATA_PATH} to {args.JSON_DATA_PATH} ..")
+        convert_xml_to_json(args.XML_DATA_PATH,args.JSON_DATA_PATH)
     
+    print(f"Loading Json Data from {args.JSON_DATA_PATH} ..")
     json_data=read_json_file(args.JSON_DATA_PATH)
     
     if args.SELECT_METABOLITIES:
+        print(f"Loading Selected Metabolities from {args.SELECT_METABOLITIES} ..")
         selected_metabolities=pd.read_csv(args.SELECT_METABOLITIES)["0"].tolist()[:]
+        print(f"Generating KG ..")
         Nodes,Relations=build_graph(json_data,selected_metabolities)
     else:
+        print(f"Generating KG ..")
         Nodes,Relations=build_graph(json_data)
     
     nodes_num=count_nodes(Nodes)
@@ -43,6 +48,7 @@ if __name__=="__main__":
         graph=create_relations(graph,Relations)
         
     if args.CREATE_TRIPLE:
+        print(f"Generating Triples ..")
         result = graph.run("MATCH (e1)-[r]->(e2) RETURN e1, type(r), e2")
         with open(os.path.join(args.DATA_DIR,"triples.txt"),"w+") as f:
             for record in result:
