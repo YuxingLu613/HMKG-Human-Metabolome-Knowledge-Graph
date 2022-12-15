@@ -415,14 +415,14 @@ def create_node(graph, Nodes):
     for i in tqdm(drop_duplicate(Tissue_list), desc="Creating Tissue Nodes"):
         graph.create(Node("Tissue", name=i))
 
-    for i in tqdm(drop_duplicate(Pathway_list), desc="Creating Pathway Nodes"):
-        graph.create(Node("Pathway", **i))
+    # for i in tqdm(drop_duplicate(Pathway_list), desc="Creating Pathway Nodes"):
+    #     graph.create(Node("Pathway", **i))
 
     for i in tqdm(drop_duplicate(Concentration), desc="Creating Concentration Nodes"):
         graph.create(Node("Concentration", **i))
 
-    for i in tqdm(drop_duplicate(Reference_list), desc="Creating Reference Nodes"):
-        graph.create(Node("Reference", **i))
+    # for i in tqdm(drop_duplicate(Reference_list), desc="Creating Reference Nodes"):
+    #     graph.create(Node("Reference", **i))
 
     for i in tqdm(drop_duplicate(Disease_list), desc="Creating Disease Nodes"):
         graph.create(Node("Disease", **i))
@@ -556,27 +556,27 @@ def create_relations(graph, Relations):
         except Exception as e:
             print(e)
 
-    for sn, rel, en in tqdm(drop_duplicate(Rel_reference_concentration),desc="Creating Reference Concentration Relations"):
-        try:
-            id = sn["id"]
-            sn = graph.nodes.match("Concentration").where(
-                f"_.id='{id}'").first()
-            if "pubmed_id" in en.keys():
-                pubmed_id = en["pubmed_id"]
-                if pubmed_id:
-                    en = graph.nodes.match("Reference").where(
-                        f"_.pubmed_id='{pubmed_id}'").first()
-                else:
-                    reference_text = en["reference_text"]
-                    en = graph.nodes.match("Reference").where(
-                        f"_.reference_text='{reference_text}'").first()
-            else:
-                reference_text = en["reference_text"]
-                en = graph.nodes.match("Reference").where(
-                    f"_.reference_text='{reference_text}'").first()
-            graph.create(Relationship(sn, rel, en))
-        except Exception as e:
-            print(e)
+    # for sn, rel, en in tqdm(drop_duplicate(Rel_reference_concentration),desc="Creating Reference Concentration Relations"):
+    #     try:
+    #         id = sn["id"]
+    #         sn = graph.nodes.match("Concentration").where(
+    #             f"_.id='{id}'").first()
+    #         if "pubmed_id" in en.keys():
+    #             pubmed_id = en["pubmed_id"]
+    #             if pubmed_id:
+    #                 en = graph.nodes.match("Reference").where(
+    #                     f"_.pubmed_id='{pubmed_id}'").first()
+    #             else:
+    #                 reference_text = en["reference_text"]
+    #                 en = graph.nodes.match("Reference").where(
+    #                     f"_.reference_text='{reference_text}'").first()
+    #         else:
+    #             reference_text = en["reference_text"]
+    #             en = graph.nodes.match("Reference").where(
+    #                 f"_.reference_text='{reference_text}'").first()
+    #         graph.create(Relationship(sn, rel, en))
+    #     except Exception as e:
+    #         print(e)
 
     for sn, rel, en in tqdm(drop_duplicate(Rel_cellular_location),desc="Creating Cellular Relations"):
         try:
@@ -607,60 +607,60 @@ def create_relations(graph, Relations):
         except Exception as e:
             print(e)
 
-    for sn, rel, en in tqdm(drop_duplicate(Rel_pathway),desc="Creating Pathway Relations"):
-        try:
-            sn = graph.nodes.match("HMDB_NO").where(
-                f"_.accession='{sn}'").first()
-            if not en:
-                continue
-            smpdb_id = en["smpdb_id"]
-            en = graph.nodes.match("Pathway").where(
-                f"_.smpdb_id='{smpdb_id}'").first()
-            graph.create(Relationship(sn, rel, en))
-        except Exception as e:
-            print(e)
+    # for sn, rel, en in tqdm(drop_duplicate(Rel_pathway),desc="Creating Pathway Relations"):
+    #     try:
+    #         sn = graph.nodes.match("HMDB_NO").where(
+    #             f"_.accession='{sn}'").first()
+    #         if not en:
+    #             continue
+    #         smpdb_id = en["smpdb_id"]
+    #         en = graph.nodes.match("Pathway").where(
+    #             f"_.smpdb_id='{smpdb_id}'").first()
+    #         graph.create(Relationship(sn, rel, en))
+    #     except Exception as e:
+    #         print(e)
 
-    for sn, rel, en in tqdm(drop_duplicate(Rel_reference_disease),desc="Creating Reference Disease Relations"):
-        try:
-            name = sn["name"]
-            sn = graph.nodes.match("Disease").where(f"_.name='{name}'").first()
-            if "pubmed_id" in en.keys():
-                pubmed_id = en["pubmed_id"]
-                if pubmed_id:
-                    en = graph.nodes.match("Reference").where(
-                        f"_.pubmed_id='{pubmed_id}'").first()
-                else:
-                    reference_text = en["reference_text"]
-                    en = graph.nodes.match("Reference").where(
-                        f"_.reference_text='{reference_text}'").first()
-            else:
-                reference_text = en["reference_text"]
-                en = graph.nodes.match("Reference").where(
-                    f"_.reference_text='{reference_text}'").first()
-            graph.create(Relationship(sn, rel, en))
-        except Exception as e:
-            print(e)
+    # for sn, rel, en in tqdm(drop_duplicate(Rel_reference_disease),desc="Creating Reference Disease Relations"):
+    #     try:
+    #         name = sn["name"]
+    #         sn = graph.nodes.match("Disease").where(f"_.name='{name}'").first()
+    #         if "pubmed_id" in en.keys():
+    #             pubmed_id = en["pubmed_id"]
+    #             if pubmed_id:
+    #                 en = graph.nodes.match("Reference").where(
+    #                     f"_.pubmed_id='{pubmed_id}'").first()
+    #             else:
+    #                 reference_text = en["reference_text"]
+    #                 en = graph.nodes.match("Reference").where(
+    #                     f"_.reference_text='{reference_text}'").first()
+    #         else:
+    #             reference_text = en["reference_text"]
+    #             en = graph.nodes.match("Reference").where(
+    #                 f"_.reference_text='{reference_text}'").first()
+    #         graph.create(Relationship(sn, rel, en))
+    #     except Exception as e:
+    #         print(e)
 
-    for sn, rel, en in tqdm(drop_duplicate(Rel_general_reference),desc="Creating General Reference Relations"):
-        try:
-            sn = graph.nodes.match("HMDB_NO").where(
-                f"_.accession='{sn}'").first()
-            if "pubmed_id" in en.keys():
-                pubmed_id = en["pubmed_id"]
-                if pubmed_id:
-                    en = graph.nodes.match("Reference").where(
-                        f"_.pubmed_id='{pubmed_id}'").first()
-                else:
-                    reference_text = en["reference_text"]
-                    en = graph.nodes.match("Reference").where(
-                        f"_.reference_text='{reference_text}'").first()
-            else:
-                reference_text = en["reference_text"]
-                en = graph.nodes.match("Reference").where(
-                    f"_.reference_text='{reference_text}'").first()
-            graph.create(Relationship(sn, rel, en))
-        except Exception as e:
-            print(e)
+    # for sn, rel, en in tqdm(drop_duplicate(Rel_general_reference),desc="Creating General Reference Relations"):
+    #     try:
+    #         sn = graph.nodes.match("HMDB_NO").where(
+    #             f"_.accession='{sn}'").first()
+    #         if "pubmed_id" in en.keys():
+    #             pubmed_id = en["pubmed_id"]
+    #             if pubmed_id:
+    #                 en = graph.nodes.match("Reference").where(
+    #                     f"_.pubmed_id='{pubmed_id}'").first()
+    #             else:
+    #                 reference_text = en["reference_text"]
+    #                 en = graph.nodes.match("Reference").where(
+    #                     f"_.reference_text='{reference_text}'").first()
+    #         else:
+    #             reference_text = en["reference_text"]
+    #             en = graph.nodes.match("Reference").where(
+    #                 f"_.reference_text='{reference_text}'").first()
+    #         graph.create(Relationship(sn, rel, en))
+    #     except Exception as e:
+    #         print(e)
 
     for sn, rel, en in tqdm(drop_duplicate(Rel_disease),desc="Creating Disease Relations"):
         try:
