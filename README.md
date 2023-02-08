@@ -1,4 +1,5 @@
 # HMKG: Human Metabolome Knowledge Graph
+<p align="left"> <img src="https://komarev.com/ghpvc/?username=yuxinglu613&label=Profile%20views&color=0e75b6&style=flat" alt="yuxinglu613" /> </p>
 
 ## Introduction
 
